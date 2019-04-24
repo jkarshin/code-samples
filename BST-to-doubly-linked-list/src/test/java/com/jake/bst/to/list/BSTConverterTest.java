@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import com.jake.bst.to.list.impl.InPlaceBSTConverter;
 import com.jake.bst.to.list.pojo.Node;
 
 public class BSTConverterTest {
@@ -18,8 +19,7 @@ public class BSTConverterTest {
 	// * Members
 	// *************************************
 
-	// TODO [Apr 24, 2019] Initialize
-	private BSTConverter converter;
+	private BSTConverter converter = new InPlaceBSTConverter();
 
 	// *************************************
 	// * Test + Helpers
@@ -28,10 +28,23 @@ public class BSTConverterTest {
 	@ParameterizedTest
 	@MethodSource("provideTestCases")
 	<T> void testConverter(Node<T> root) {
+		/*
+		 * Before doing the conversion, make a copy of the original BST so that we have something to compare the output
+		 * list to. (If the BSTConverter implementation is in-place, the original BST will no longer be a BST.)
+		 */
+		Node<T> rootCopy = deepCopyBST(root);
+
 		Node<T> head = converter.convert(root);
 
-		Node<T> extraListNode = assertConsistentValues(root, head);
+		Node<T> extraListNode = assertConsistentValues(rootCopy, head);
 		assertNull(extraListNode, "List contains more nodes than the tree or contains a loop.");
+	}
+
+	private <T> Node<T> deepCopyBST(Node<T> root) {
+		Node<T> leftCopy = root.node1 != null ? deepCopyBST(root.node1) : null;
+		Node<T> rightCopy = root.node2 != null ? deepCopyBST(root.node2) : null;
+
+		return new Node<>(root.value, leftCopy, rightCopy);
 	}
 
 	/**
