@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import com.jake.bst.to.list.pojo.Node;
@@ -67,12 +66,11 @@ public class BSTConverterTest {
 	// * Cases
 	// *************************************
 
-	// TODO [Apr 24, 2019] Might not need "Arguments" interface
-	static Stream<Arguments> provideTestCases() {
+	static Stream<Node<?>> provideTestCases() {
 		//@formatter:off
 		return Stream.of(
 		    // Tree with a single node
-			Arguments.of(new Node<>(42)),
+			new Node<>(42),
 			/*
 			 * Tree with only left children
 			 *      3
@@ -81,14 +79,12 @@ public class BSTConverterTest {
 			 *   /
 			 *  1
 			 */
-			Arguments.of(
-				new Node<>(3,
-					new Node<>(2,
-						new Node<>(1),
-						null
-					),
+			new Node<>(3,
+				new Node<>(2,
+					new Node<>(1),
 					null
-				)
+				),
+				null
 			),
 			/*
 			 * Tree with only right children
@@ -98,13 +94,11 @@ public class BSTConverterTest {
 			 *         \
 			 *          3
 			 */
-			Arguments.of(
-				new Node<>(1,
+			new Node<>(1,
+				null,
+				new Node<>(2,
 					null,
-					new Node<>(2,
-						null,
-						new Node<>(3)
-					)
+					new Node<>(3)
 				)
 			),
 			/*
@@ -116,16 +110,14 @@ public class BSTConverterTest {
 			 *      \   /
 			 *       2 4
 			 */
-			Arguments.of(
-				new Node<>(3, 
-					new Node<>(1, 
-						null,
-						new Node<>(2)
-					),
-					new Node<>(5,
-						new Node<>(4),
-						null
-					)
+			new Node<>(3, 
+				new Node<>(1, 
+					null,
+					new Node<>(2)
+				),
+				new Node<>(5,
+					new Node<>(4),
+					null
 				)
 			),
 			/*
@@ -137,16 +129,14 @@ public class BSTConverterTest {
 			 *   / \   / \
 			 *  1   3 5   7
 			 */
-			Arguments.of(
-				new Node<>(4,
-					new Node<>(2,
-						new Node<>(1),
-						new Node<>(3)
-					),
-					new Node<>(6,
-						new Node<>(5),
-						new Node<>(7)
-					)
+			new Node<>(4,
+				new Node<>(2,
+					new Node<>(1),
+					new Node<>(3)
+				),
+				new Node<>(6,
+					new Node<>(5),
+					new Node<>(7)
 				)
 			),
 			/*
@@ -162,20 +152,18 @@ public class BSTConverterTest {
 			 *         / \
 			 *        4   6
 			 */
-			Arguments.of(
-				new Node<>(2,
-					new Node<>(1),
-					new Node<>(3,
-						null,
-						new Node<>(7,
-							new Node<>(5,
-								new Node<>(4),
-								new Node<>(6)
-							),
-							null
-						)
+			new Node<>(2,
+				new Node<>(1),
+				new Node<>(3,
+					null,
+					new Node<>(7,
+						new Node<>(5,
+							new Node<>(4),
+							new Node<>(6)
+						),
+						null
 					)
-				)	
+				)
 			)
 		);
 		//@formatter:on
