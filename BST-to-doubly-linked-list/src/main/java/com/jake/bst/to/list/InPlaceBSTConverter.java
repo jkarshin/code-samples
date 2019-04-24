@@ -1,6 +1,5 @@
-package com.jake.bst.to.list.impl;
+package com.jake.bst.to.list;
 
-import com.jake.bst.to.list.BSTConverter;
 import com.jake.bst.to.list.pojo.Node;
 
 /**

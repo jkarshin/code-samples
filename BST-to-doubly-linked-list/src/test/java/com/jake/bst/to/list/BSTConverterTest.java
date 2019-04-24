@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import com.jake.bst.to.list.impl.InPlaceBSTConverter;
 import com.jake.bst.to.list.pojo.Node;
 
 public class BSTConverterTest {

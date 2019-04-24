@@ -12,14 +12,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class SubstringDeriverTest {
 
 	// *************************************
-	// * Member
+	// * Members
 	// *************************************
 
-	// TODO [Apr 24, 2019] Initialize
-	private SubstringDeriver deriver;
+	private SubstringDeriver deriver = new RecursiveSubstringDeriver();
 
 	// *************************************
-	// * Test
+	// * Tests
 	// *************************************
 
 	@ParameterizedTest
