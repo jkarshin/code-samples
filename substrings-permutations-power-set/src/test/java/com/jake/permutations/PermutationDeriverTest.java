@@ -15,8 +15,7 @@ public class PermutationDeriverTest {
 	// * Members
 	// *************************************
 
-	// TODO [Apr 24, 2019] Initialize
-	private PermutationDeriver deriver;
+	private PermutationDeriver deriver = new RecursivePermutationDeriver();
 
 	// *************************************
 	// * Tests
