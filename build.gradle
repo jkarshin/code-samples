@@ -1,0 +1,21 @@
+subprojects {
+    apply plugin : 'java'
+    apply plugin : 'eclipse'
+	
+	sourceCompatibility = '12'
+    targetCompatibility = '12'
+	
+    repositories {
+        mavenCentral()
+    }
+	
+	dependencies {
+	    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+	}
+	
+	eclipse {
+	    jdt {
+		    javaRuntimeName = 'jdk-12'
+		}
+	}
+}
