@@ -15,8 +15,7 @@ public class PowerSetDeriverTest {
 	// * Members
 	// *************************************
 
-	// TODO [Apr 24, 2019] Initialize
-	private PowerSetDeriver deriver;
+	private PowerSetDeriver deriver = new IterativePowerSetDeriver();
 
 	// *************************************
 	// * Tests
