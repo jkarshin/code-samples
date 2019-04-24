@@ -12,18 +12,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class SubstringDeriverTest {
 
 	// *************************************
-	// * Members
-	// *************************************
-
-	private SubstringDeriver deriver = new RecursiveSubstringDeriver();
-
-	// *************************************
 	// * Tests
 	// *************************************
 
 	@ParameterizedTest
-	@MethodSource("provideTestCases")
-	void testDeriver(String input, Set<String> expectedSubstrings) {
+	@MethodSource("provideDeriverAndTestCases")
+	void testDeriver(SubstringDeriver deriver, String input, Set<String> expectedSubstrings) {
 		Set<String> output = deriver.derive(input);
 		assertEquals(expectedSubstrings, output);
 	}
@@ -32,7 +26,14 @@ public class SubstringDeriverTest {
 	// * Cases
 	// *************************************
 
-	static Stream<Arguments> provideTestCases() {
+	static Stream<Arguments> provideDeriverAndTestCases() {
+		//@formatter:off
+		return Stream.of(new IterativeSubstringDeriver(), new RecursiveSubstringDeriver())
+				.flatMap(deriver -> provideTestCases().map(args -> Arguments.of(deriver, args.get()[0], args.get()[1])));
+		//@formatter:on
+	}
+
+	private static Stream<Arguments> provideTestCases() {
 		//@formatter:off
 		return Stream.of(
 			// Empty String
