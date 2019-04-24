@@ -5,14 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import com.jake.bst.to.list.pojo.DoublyLinkedList;
 import com.jake.bst.to.list.pojo.Node;
 
 public class BSTConverterTest {
@@ -31,32 +29,10 @@ public class BSTConverterTest {
 	@ParameterizedTest
 	@MethodSource("provideTestCases")
 	<T> void testConverter(Node<T> root) {
-		// TODO [Apr 24, 2019] May not need DoublyLinkedList class; head of the list may be sufficient
-		DoublyLinkedList<T> list = converter.convert(root);
+		Node<T> head = converter.convert(root);
 
-		Node<T> extraListNode = assertConsistentValues(root, list.getHead());
+		Node<T> extraListNode = assertConsistentValues(root, head);
 		assertNull(extraListNode, "List contains more nodes than the tree or contains a loop.");
-	}
-
-	// TODO [Apr 24, 2019] may not need
-	private <T> void assertNoCyclesInList(Node<T> head, Function<Node<T>, Node<T>> next) {
-		/*
-		 * If there are no cycles, we will eventually reach the tail (a node whose nextNode is null) by iterating over
-		 * the list. If there is a cycle, we would iterate forever. To detect this, use two iterators, one moving faster
-		 * than the other. If the faster iterator catches the slower iterator, we know there is a cycle.
-		 */
-
-		Function<Node<T>, Node<T>> fastNext = next.andThen(next);
-
-		// This could be expressed as a for-loop, but it is broken apart for readability
-		Node<T> iterSlow = head;
-		Node<T> iterFast = next.apply(head);
-		while (iterFast != null && next.apply(iterFast) != null) {
-			assertTrue(iterFast != iterSlow, "Cycle detected in list.");
-
-			iterSlow = next.apply(iterSlow);
-			iterFast = fastNext.apply(iterFast);
-		}
 	}
 
 	/**
@@ -91,10 +67,116 @@ public class BSTConverterTest {
 	// * Cases
 	// *************************************
 
-	Stream<Arguments> provideTestCases() {
+	// TODO [Apr 24, 2019] Might not need "Arguments" interface
+	static Stream<Arguments> provideTestCases() {
 		//@formatter:off
 		return Stream.of(
-		    // TODO [Apr 24, 2019] Add test cases
+		    // Tree with a single node
+			Arguments.of(new Node<>(42)),
+			/*
+			 * Tree with only left children
+			 *      3
+			 *     /
+			 *    2
+			 *   /
+			 *  1
+			 */
+			Arguments.of(
+				new Node<>(3,
+					new Node<>(2,
+						new Node<>(1),
+						null
+					),
+					null
+				)
+			),
+			/*
+			 * Tree with only right children
+			 *      1
+			 *       \
+			 *        2
+			 *         \
+			 *          3
+			 */
+			Arguments.of(
+				new Node<>(1,
+					null,
+					new Node<>(2,
+						null,
+						new Node<>(3)
+					)
+				)
+			),
+			/*
+			 * Tree with alternating left/right children
+			 * 
+			 *        3
+			 *      /   \
+			 *     1     5
+			 *      \   /
+			 *       2 4
+			 */
+			Arguments.of(
+				new Node<>(3, 
+					new Node<>(1, 
+						null,
+						new Node<>(2)
+					),
+					new Node<>(5,
+						new Node<>(4),
+						null
+					)
+				)
+			),
+			/*
+			 * Full tree
+			 * 
+			 *       4
+			 *     /   \
+			 *    2     6
+			 *   / \   / \
+			 *  1   3 5   7
+			 */
+			Arguments.of(
+				new Node<>(4,
+					new Node<>(2,
+						new Node<>(1),
+						new Node<>(3)
+					),
+					new Node<>(6,
+						new Node<>(5),
+						new Node<>(7)
+					)
+				)
+			),
+			/*
+			 * Imbalanced tree
+			 * 
+			 *       2
+			 *     /   \
+			 *    1     3
+			 *           \
+			 *            7
+			 *           /
+			 *          5
+			 *         / \
+			 *        4   6
+			 */
+			Arguments.of(
+				new Node<>(2,
+					new Node<>(1),
+					new Node<>(3,
+						null,
+						new Node<>(7,
+							new Node<>(5,
+								new Node<>(4),
+								new Node<>(6)
+							),
+							null
+						)
+					)
+				)	
+			)
 		);
 		//@formatter:on
 	}
