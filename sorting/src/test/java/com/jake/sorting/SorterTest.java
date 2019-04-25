@@ -2,6 +2,7 @@ package com.jake.sorting;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -16,7 +17,7 @@ public class SorterTest {
 	// *************************************
 
 	@ParameterizedTest
-	@MethodSource("")
+	@MethodSource("provideSorterAndTestCases")
 	<T extends Comparable<T>> void testSorter(Sorter<T> sorter, List<T> input, List<T> expectedOutput) {
 		sorter.sort(input);
 		assertEquals(expectedOutput, input);
@@ -26,10 +27,15 @@ public class SorterTest {
 	// * Test Cases
 	// *************************************
 
+	@SuppressWarnings("unchecked")
 	static Stream<Arguments> provideSorterAndTestCases() {
 		// TODO [Apr 24, 2019] Add implementations here
-		return Stream.of()
-				.flatMap(sorter -> provideTestCases().map(args -> Arguments.of(sorter, args.get()[0], args.get()[1])));
+		//@formatter:off
+		return Stream.of(new MergeSorter<Integer>())
+				.flatMap(sorter ->
+						// Need to wrap the input list, since List.of(...) yields an ImmutableList
+						provideTestCases().map(args -> Arguments.of(sorter, new ArrayList<>((List<Integer>) args.get()[0]), args.get()[1])));
+		//@formatter:on
 	}
 
 	private static Stream<Arguments> provideTestCases() {
