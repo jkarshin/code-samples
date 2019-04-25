@@ -11,29 +11,29 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class PermutationDeriverTest {
 
-	// *************************************
-	// * Members
-	// *************************************
+    // *************************************
+    // * Members
+    // *************************************
 
-	private PermutationDeriver deriver = new RecursivePermutationDeriver();
+    private PermutationDeriver deriver = new RecursivePermutationDeriver();
 
-	// *************************************
-	// * Tests
-	// *************************************
+    // *************************************
+    // * Tests
+    // *************************************
 
-	@ParameterizedTest
-	@MethodSource("provideTestCases")
-	void testDeriver(String s, int k, Set<String> expectedPermutations) {
-		Set<String> results = deriver.derive(s, k);
-		assertEquals(expectedPermutations, results);
-	}
+    @ParameterizedTest
+    @MethodSource("provideTestCases")
+    void testDeriver(String s, int k, Set<String> expectedPermutations) {
+        Set<String> results = deriver.derive(s, k);
+        assertEquals(expectedPermutations, results);
+    }
 
-	// *************************************
-	// * Cases
-	// *************************************
+    // *************************************
+    // * Cases
+    // *************************************
 
-	static Stream<Arguments> provideTestCases() {
-		//@formatter:off
+    static Stream<Arguments> provideTestCases() {
+        //@formatter:off
 		return Stream.of(
 			// Empty String
 			Arguments.of("", 0, Set.of("")),

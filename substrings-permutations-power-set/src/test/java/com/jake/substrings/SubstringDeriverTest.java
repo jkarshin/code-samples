@@ -11,30 +11,30 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class SubstringDeriverTest {
 
-	// *************************************
-	// * Tests
-	// *************************************
+    // *************************************
+    // * Tests
+    // *************************************
 
-	@ParameterizedTest
-	@MethodSource("provideDeriverAndTestCases")
-	void testDeriver(SubstringDeriver deriver, String input, Set<String> expectedSubstrings) {
-		Set<String> output = deriver.derive(input);
-		assertEquals(expectedSubstrings, output);
-	}
+    @ParameterizedTest
+    @MethodSource("provideDeriverAndTestCases")
+    void testDeriver(SubstringDeriver deriver, String input, Set<String> expectedSubstrings) {
+        Set<String> output = deriver.derive(input);
+        assertEquals(expectedSubstrings, output);
+    }
 
-	// *************************************
-	// * Cases
-	// *************************************
+    // *************************************
+    // * Cases
+    // *************************************
 
-	static Stream<Arguments> provideDeriverAndTestCases() {
-		//@formatter:off
+    static Stream<Arguments> provideDeriverAndTestCases() {
+        //@formatter:off
 		return Stream.of(new IterativeSubstringDeriver(), new RecursiveSubstringDeriver())
 				.flatMap(deriver -> provideTestCases().map(args -> Arguments.of(deriver, args.get()[0], args.get()[1])));
 		//@formatter:on
-	}
+    }
 
-	private static Stream<Arguments> provideTestCases() {
-		//@formatter:off
+    private static Stream<Arguments> provideTestCases() {
+        //@formatter:off
 		return Stream.of(
 			// Empty String
 			Arguments.of("",  Set.of("")),
@@ -48,5 +48,5 @@ public class SubstringDeriverTest {
 			Arguments.of("ababc", Set.of("", "a", "ab", "aba", "abab", "ababc", "b", "ba", "bab", "babc", "abc", "bc", "c" ))
 		);
 		//@formatter:on
-	}
+    }
 }

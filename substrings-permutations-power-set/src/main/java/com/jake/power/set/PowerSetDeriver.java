@@ -8,5 +8,5 @@ import java.util.Set;
  * Derive all subsets of a given set (including the empty set and the input set itself).
  */
 public interface PowerSetDeriver {
-	<T> Set<Set<T>> derive(Set<T> set);
+    <T> Set<Set<T>> derive(Set<T> set);
 }

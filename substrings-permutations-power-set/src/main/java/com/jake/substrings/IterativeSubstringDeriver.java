@@ -9,21 +9,21 @@ import java.util.Set;
  */
 public class IterativeSubstringDeriver implements SubstringDeriver {
 
-	// *************************************
-	// * Implementations
-	// *************************************
+    // *************************************
+    // * Implementations
+    // *************************************
 
-	@Override
-	public Set<String> derive(String s) {
-		Set<String> substrings = new HashSet<>();
-		substrings.add("");
+    @Override
+    public Set<String> derive(String s) {
+        Set<String> substrings = new HashSet<>();
+        substrings.add("");
 
-		for (int i = 0; i < s.length(); ++i) {
-			for (int j = i + 1; j <= s.length(); ++j) {
-				substrings.add(s.substring(i, j));
-			}
-		}
+        for (int i = 0; i < s.length(); ++i) {
+            for (int j = i + 1; j <= s.length(); ++j) {
+                substrings.add(s.substring(i, j));
+            }
+        }
 
-		return substrings;
-	}
+        return substrings;
+    }
 }

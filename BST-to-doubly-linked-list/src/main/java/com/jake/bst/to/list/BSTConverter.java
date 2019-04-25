@@ -9,8 +9,8 @@ import com.jake.bst.to.list.pojo.Node;
  * Convert a given binary search tree into a doubly linked list. The order of the node values must be preserved.
  */
 public interface BSTConverter {
-	/**
-	 * Converts the supplied BST, returning the head of a doubly linked list with values in the same order as the BST.
-	 */
-	<T> Node<T> convert(Node<T> root);
+    /**
+     * Converts the supplied BST, returning the head of a doubly linked list with values in the same order as the BST.
+     */
+    <T> Node<T> convert(Node<T> root);
 }

@@ -12,33 +12,33 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class SorterTest {
 
-	// *************************************
-	// * Tests
-	// *************************************
+    // *************************************
+    // * Tests
+    // *************************************
 
-	@ParameterizedTest
-	@MethodSource("provideSorterAndTestCases")
-	<T extends Comparable<T>> void testSorter(Sorter<T> sorter, List<T> input, List<T> expectedOutput) {
-		sorter.sort(input);
-		assertEquals(expectedOutput, input);
-	}
+    @ParameterizedTest
+    @MethodSource("provideSorterAndTestCases")
+    <T extends Comparable<T>> void testSorter(Sorter<T> sorter, List<T> input, List<T> expectedOutput) {
+        sorter.sort(input);
+        assertEquals(expectedOutput, input);
+    }
 
-	// *************************************
-	// * Test Cases
-	// *************************************
+    // *************************************
+    // * Test Cases
+    // *************************************
 
-	@SuppressWarnings("unchecked")
-	static Stream<Arguments> provideSorterAndTestCases() {
-		//@formatter:off
+    @SuppressWarnings("unchecked")
+    static Stream<Arguments> provideSorterAndTestCases() {
+        //@formatter:off
 		return Stream.of(new CountingSorter(), new HeapSorter<Integer>(), new MergeSorter<Integer>(), new QuickSorter<Integer>())
 				.flatMap(sorter ->
 						// Need to wrap the input list, since List.of(...) yields an ImmutableList
 						provideTestCases().map(args -> Arguments.of(sorter, new ArrayList<>((List<Integer>) args.get()[0]), args.get()[1])));
 		//@formatter:on
-	}
+    }
 
-	private static Stream<Arguments> provideTestCases() {
-		//@formatter:off
+    private static Stream<Arguments> provideTestCases() {
+        //@formatter:off
 		return Stream.of(
 			// Empty List
 			Arguments.of(List.of(), List.of()),
@@ -60,5 +60,5 @@ public class SorterTest {
 			Arguments.of(List.of(-3, 2, 4, 1, -3, 5, 1, 1), List.of(-3, -3, 1, 1, 1, 2, 4, 5))
 		);
 		//@formatter:on
-	}
+    }
 }

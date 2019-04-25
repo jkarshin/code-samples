@@ -10,37 +10,37 @@ import java.util.stream.Collectors;
  */
 public class RecursivePermutationDeriver implements PermutationDeriver {
 
-	// *************************************
-	// * Implementations
-	// *************************************
+    // *************************************
+    // * Implementations
+    // *************************************
 
-	@Override
-	public Set<String> derive(String s, int k) {
-		Set<Character> chars = s.chars()
-				.mapToObj(c -> (char) c)
-				.collect(Collectors.toSet());
+    @Override
+    public Set<String> derive(String s, int k) {
+        Set<Character> chars = s.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toSet());
 
-		return derivePermutationsStartingWith("", chars, k);
-	}
+        return derivePermutationsStartingWith("", chars, k);
+    }
 
-	// *************************************
-	// * Helpers
-	// *************************************
+    // *************************************
+    // * Helpers
+    // *************************************
 
-	private Set<String> derivePermutationsStartingWith(String prefix, Set<Character> remainingChars, int k) {
-		if (prefix.length() == k) {
-			return Set.of(prefix);
-		}
+    private Set<String> derivePermutationsStartingWith(String prefix, Set<Character> remainingChars, int k) {
+        if (prefix.length() == k) {
+            return Set.of(prefix);
+        }
 
-		Set<String> permutations = new HashSet<String>();
+        Set<String> permutations = new HashSet<String>();
 
-		for (Character c : remainingChars) {
-			Set<Character> otherChars = new HashSet<>(remainingChars);
-			otherChars.remove(c);
+        for (Character c : remainingChars) {
+            Set<Character> otherChars = new HashSet<>(remainingChars);
+            otherChars.remove(c);
 
-			permutations.addAll(derivePermutationsStartingWith(prefix + c, otherChars, k));
-		}
+            permutations.addAll(derivePermutationsStartingWith(prefix + c, otherChars, k));
+        }
 
-		return permutations;
-	}
+        return permutations;
+    }
 }

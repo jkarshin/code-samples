@@ -11,29 +11,29 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class PowerSetDeriverTest {
 
-	// *************************************
-	// * Members
-	// *************************************
+    // *************************************
+    // * Members
+    // *************************************
 
-	private PowerSetDeriver deriver = new IterativePowerSetDeriver();
+    private PowerSetDeriver deriver = new IterativePowerSetDeriver();
 
-	// *************************************
-	// * Tests
-	// *************************************
+    // *************************************
+    // * Tests
+    // *************************************
 
-	@ParameterizedTest
-	@MethodSource("provideTestCases")
-	<T> void testDeriver(Set<T> input, Set<Set<T>> expectedOutput) {
-		Set<Set<T>> output = deriver.derive(input);
-		assertEquals(expectedOutput, output);
-	}
+    @ParameterizedTest
+    @MethodSource("provideTestCases")
+    <T> void testDeriver(Set<T> input, Set<Set<T>> expectedOutput) {
+        Set<Set<T>> output = deriver.derive(input);
+        assertEquals(expectedOutput, output);
+    }
 
-	// *************************************
-	// * Cases
-	// *************************************
+    // *************************************
+    // * Cases
+    // *************************************
 
-	static Stream<Arguments> provideTestCases() {
-		//@formatter:off
+    static Stream<Arguments> provideTestCases() {
+        //@formatter:off
 		return Stream.of(
 			// Empty set
 			Arguments.of(Set.of(), Set.of(Set.of())),
@@ -43,5 +43,5 @@ public class PowerSetDeriverTest {
 			Arguments.of(Set.of(1, 2, 3), Set.of(Set.of(), Set.of(1), Set.of(2), Set.of(3), Set.of(1, 2), Set.of(1, 3), Set.of(2, 3), Set.of(1, 2, 3)))
 		);
 		//@formatter:on
-	}
+    }
 }
