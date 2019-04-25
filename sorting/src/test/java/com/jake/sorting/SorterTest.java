@@ -29,9 +29,8 @@ public class SorterTest {
 
 	@SuppressWarnings("unchecked")
 	static Stream<Arguments> provideSorterAndTestCases() {
-		// TODO [Apr 24, 2019] Add implementations here
 		//@formatter:off
-		return Stream.of(new MergeSorter<Integer>(), new HeapSorter<Integer>(), new QuickSorter<Integer>())
+		return Stream.of(new CountingSorter(), new HeapSorter<Integer>(), new MergeSorter<Integer>(), new QuickSorter<Integer>())
 				.flatMap(sorter ->
 						// Need to wrap the input list, since List.of(...) yields an ImmutableList
 						provideTestCases().map(args -> Arguments.of(sorter, new ArrayList<>((List<Integer>) args.get()[0]), args.get()[1])));
@@ -56,9 +55,9 @@ public class SorterTest {
 			// List in reverse order, with duplicates
 			Arguments.of(List.of(3, 3, 2, 2, 1), List.of(1, 2, 2, 3, 3)),
 			// List with no order, no duplicates
-			Arguments.of(List.of(3, 2, 4, 1), List.of(1, 2, 3, 4)),
+			Arguments.of(List.of(3, -2, 4, 1), List.of(-2, 1, 3, 4)),
 			// List with no order, with duplicates
-			Arguments.of(List.of(3, 2, 4, 1, 3, 5, 1, 1), List.of(1, 1, 1, 2, 3, 3, 4, 5))
+			Arguments.of(List.of(-3, 2, 4, 1, -3, 5, 1, 1), List.of(-3, -3, 1, 1, 1, 2, 4, 5))
 		);
 		//@formatter:on
 	}
