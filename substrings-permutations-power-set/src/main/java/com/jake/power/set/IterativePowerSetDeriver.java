@@ -15,53 +15,53 @@ import java.util.Set;
  */
 public class IterativePowerSetDeriver implements PowerSetDeriver {
 
-	// *************************************
-	// * Implementations
-	// *************************************
+    // *************************************
+    // * Implementations
+    // *************************************
 
-	@Override
-	public <T> Set<Set<T>> derive(Set<T> set) {
-		Set<Set<T>> subsets = new HashSet<>();
-		BitSet bits = new BitSet(set.size());
-		// Add the elements to a list for quick random access (by index)
-		List<T> orderedElements = new ArrayList<>(set);
+    @Override
+    public <T> Set<Set<T>> derive(Set<T> set) {
+        Set<Set<T>> subsets = new HashSet<>();
+        BitSet bits = new BitSet(set.size());
+        // Add the elements to a list for quick random access (by index)
+        List<T> orderedElements = new ArrayList<>(set);
 
-		do {
-			subsets.add(deriveSubset(bits, orderedElements));
-		} while (incrementBits(bits, set.size()));
+        do {
+            subsets.add(deriveSubset(bits, orderedElements));
+        } while (incrementBits(bits, set.size()));
 
-		return subsets;
-	}
+        return subsets;
+    }
 
-	// *************************************
-	// * Helpers
-	// *************************************
+    // *************************************
+    // * Helpers
+    // *************************************
 
-	/**
-	 * If the bitset consists entirely of 1's, returns false; otherwise, increments the bitset by 1 and returns
-	 * true.<br>
-	 * <br>
-	 * We must pass in the number of bits, as there is no way to obtain this from the bitset. ({@link BitSet#size()}
-	 * returns the true number of bits in use by the BitSet; not the logical number of bits being used.)
-	 */
-	private boolean incrementBits(BitSet bits, int numBits) {
-		if (bits.cardinality() == numBits) {
-			return false;
-		} else {
-			int bitToSet = bits.nextClearBit(0);
-			bits.clear(0, bitToSet);
-			bits.set(bitToSet);
-			return true;
-		}
-	}
+    /**
+     * If the bitset consists entirely of 1's, returns false; otherwise, increments the bitset by 1 and returns
+     * true.<br>
+     * <br>
+     * We must pass in the number of bits, as there is no way to obtain this from the bitset. ({@link BitSet#size()}
+     * returns the true number of bits in use by the BitSet; not the logical number of bits being used.)
+     */
+    private boolean incrementBits(BitSet bits, int numBits) {
+        if (bits.cardinality() == numBits) {
+            return false;
+        } else {
+            int bitToSet = bits.nextClearBit(0);
+            bits.clear(0, bitToSet);
+            bits.set(bitToSet);
+            return true;
+        }
+    }
 
-	private <T> Set<T> deriveSubset(BitSet bits, List<T> orderedElements) {
-		Set<T> subset = new HashSet<>();
+    private <T> Set<T> deriveSubset(BitSet bits, List<T> orderedElements) {
+        Set<T> subset = new HashSet<>();
 
-		for (int i = bits.nextSetBit(0); i >= 0; i = bits.nextSetBit(i + 1)) {
-			subset.add(orderedElements.get(i));
-		}
+        for (int i = bits.nextSetBit(0); i >= 0; i = bits.nextSetBit(i + 1)) {
+            subset.add(orderedElements.get(i));
+        }
 
-		return subset;
-	}
+        return subset;
+    }
 }

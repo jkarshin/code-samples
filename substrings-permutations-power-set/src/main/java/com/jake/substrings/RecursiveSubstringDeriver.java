@@ -18,36 +18,36 @@ import java.util.stream.Collectors;
  */
 public class RecursiveSubstringDeriver implements SubstringDeriver {
 
-	// *************************************
-	// * Implementations
-	// *************************************
+    // *************************************
+    // * Implementations
+    // *************************************
 
-	@Override
-	public Set<String> derive(String s) {
-		Set<String> substrings = new HashSet<>();
-		deriveSubStringsStartingAt(0, s, substrings);
-		return substrings;
-	}
+    @Override
+    public Set<String> derive(String s) {
+        Set<String> substrings = new HashSet<>();
+        deriveSubStringsStartingAt(0, s, substrings);
+        return substrings;
+    }
 
-	// *************************************
-	// * Helpers
-	// *************************************
+    // *************************************
+    // * Helpers
+    // *************************************
 
-	private Set<String> deriveSubStringsStartingAt(int index, String s, Set<String> allSubstrings) {
-		if (index == s.length()) {
-			allSubstrings.add("");
-			return Set.of("");
-		}
+    private Set<String> deriveSubStringsStartingAt(int index, String s, Set<String> allSubstrings) {
+        if (index == s.length()) {
+            allSubstrings.add("");
+            return Set.of("");
+        }
 
-		char c = s.charAt(index);
+        char c = s.charAt(index);
 
-		Set<String> substringsAtIndex = deriveSubStringsStartingAt(index + 1, s, allSubstrings).stream()
-				.map(substring -> c + substring)
-				.collect(Collectors.toSet());
+        Set<String> substringsAtIndex = deriveSubStringsStartingAt(index + 1, s, allSubstrings).stream()
+                .map(substring -> c + substring)
+                .collect(Collectors.toSet());
 
-		allSubstrings.addAll(substringsAtIndex);
-		substringsAtIndex.add("");
+        allSubstrings.addAll(substringsAtIndex);
+        substringsAtIndex.add("");
 
-		return substringsAtIndex;
-	}
+        return substringsAtIndex;
+    }
 }
