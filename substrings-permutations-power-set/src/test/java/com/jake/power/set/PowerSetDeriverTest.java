@@ -34,14 +34,14 @@ public class PowerSetDeriverTest {
 
     static Stream<Arguments> provideTestCases() {
         //@formatter:off
-		return Stream.of(
-			// Empty set
-			Arguments.of(Set.of(), Set.of(Set.of())),
-			// Set containing a single element
-			Arguments.of(Set.of(1), Set.of(Set.of(), Set.of(1))),
-			// Multiple elements
-			Arguments.of(Set.of(1, 2, 3), Set.of(Set.of(), Set.of(1), Set.of(2), Set.of(3), Set.of(1, 2), Set.of(1, 3), Set.of(2, 3), Set.of(1, 2, 3)))
-		);
-		//@formatter:on
+        return Stream.of(
+            // Empty set
+            Arguments.of(Set.of(), Set.of(Set.of())),
+            // Set containing a single element
+            Arguments.of(Set.of(1), Set.of(Set.of(), Set.of(1))),
+            // Multiple elements
+            Arguments.of(Set.of(1, 2, 3), Set.of(Set.of(), Set.of(1), Set.of(2), Set.of(3), Set.of(1, 2), Set.of(1, 3), Set.of(2, 3), Set.of(1, 2, 3)))
+        );
+        //@formatter:on
     }
 }

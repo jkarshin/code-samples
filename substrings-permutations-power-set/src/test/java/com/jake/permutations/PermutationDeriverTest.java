@@ -34,18 +34,18 @@ public class PermutationDeriverTest {
 
     static Stream<Arguments> provideTestCases() {
         //@formatter:off
-		return Stream.of(
-			// Empty String
-			Arguments.of("", 0, Set.of("")),
-			// Non-empty String, but 0-length permutations
-			Arguments.of("abc", 0, Set.of("")),
-			// Length 1 permutations
-			Arguments.of("abc", 1, Set.of("a", "b", "c")),
-			// Permutations of length s.length
-			Arguments.of("abc", 3, Set.of("abc", "acb", "bac", "bca", "cab", "cba")),
-			// Permutations of length < s.length
-			Arguments.of("abc", 2, Set.of("ab", "ba", "ac", "ca", "bc", "cb"))
-		);
-		//@formatter:off
-	}
+        return Stream.of(
+            // Empty String
+            Arguments.of("", 0, Set.of("")),
+            // Non-empty String, but 0-length permutations
+            Arguments.of("abc", 0, Set.of("")),
+            // Length 1 permutations
+            Arguments.of("abc", 1, Set.of("a", "b", "c")),
+            // Permutations of length s.length
+            Arguments.of("abc", 3, Set.of("abc", "acb", "bac", "bca", "cab", "cba")),
+            // Permutations of length < s.length
+            Arguments.of("abc", 2, Set.of("ab", "ba", "ac", "ca", "bc", "cb"))
+        );
+        //@formatter:off
+    }
 }

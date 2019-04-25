@@ -80,104 +80,104 @@ public class BSTConverterTest {
 
     static Stream<Node<?>> provideTestCases() {
         //@formatter:off
-		return Stream.of(
-		    // Tree with a single node
-			new Node<>(42),
-			/*
-			 * Tree with only left children
-			 *      3
-			 *     /
-			 *    2
-			 *   /
-			 *  1
-			 */
-			new Node<>(3,
-				new Node<>(2,
-					new Node<>(1),
-					null
-				),
-				null
-			),
-			/*
-			 * Tree with only right children
-			 *      1
-			 *       \
-			 *        2
-			 *         \
-			 *          3
-			 */
-			new Node<>(1,
-				null,
-				new Node<>(2,
-					null,
-					new Node<>(3)
-				)
-			),
-			/*
-			 * Tree with alternating left/right children
-			 * 
-			 *        3
-			 *      /   \
-			 *     1     5
-			 *      \   /
-			 *       2 4
-			 */
-			new Node<>(3, 
-				new Node<>(1, 
-					null,
-					new Node<>(2)
-				),
-				new Node<>(5,
-					new Node<>(4),
-					null
-				)
-			),
-			/*
-			 * Full tree
-			 * 
-			 *       4
-			 *     /   \
-			 *    2     6
-			 *   / \   / \
-			 *  1   3 5   7
-			 */
-			new Node<>(4,
-				new Node<>(2,
-					new Node<>(1),
-					new Node<>(3)
-				),
-				new Node<>(6,
-					new Node<>(5),
-					new Node<>(7)
-				)
-			),
-			/*
-			 * Imbalanced tree
-			 * 
-			 *       2
-			 *     /   \
-			 *    1     3
-			 *           \
-			 *            7
-			 *           /
-			 *          5
-			 *         / \
-			 *        4   6
-			 */
-			new Node<>(2,
-				new Node<>(1),
-				new Node<>(3,
-					null,
-					new Node<>(7,
-						new Node<>(5,
-							new Node<>(4),
-							new Node<>(6)
-						),
-						null
-					)
-				)
-			)
-		);
-		//@formatter:on
+        return Stream.of(
+            // Tree with a single node
+            new Node<>(42),
+            /*
+             * Tree with only left children
+             *      3
+             *     /
+             *    2
+             *   /
+             *  1
+             */
+            new Node<>(3,
+                new Node<>(2,
+                    new Node<>(1),
+                    null
+                ),
+                null
+            ),
+            /*
+             * Tree with only right children
+             *      1
+             *       \
+             *        2
+             *         \
+             *          3
+             */
+            new Node<>(1,
+                null,
+                new Node<>(2,
+                    null,
+                    new Node<>(3)
+                )
+            ),
+            /*
+             * Tree with alternating left/right children
+             * 
+             *        3
+             *      /   \
+             *     1     5
+             *      \   /
+             *       2 4
+             */
+            new Node<>(3, 
+                new Node<>(1, 
+                    null,
+                    new Node<>(2)
+                ),
+                new Node<>(5,
+                    new Node<>(4),
+                    null
+                )
+            ),
+            /*
+             * Full tree
+             * 
+             *       4
+             *     /   \
+             *    2     6
+             *   / \   / \
+             *  1   3 5   7
+             */
+            new Node<>(4,
+                new Node<>(2,
+                    new Node<>(1),
+                    new Node<>(3)
+                ),
+                new Node<>(6,
+                    new Node<>(5),
+                    new Node<>(7)
+                )
+            ),
+            /*
+             * Imbalanced tree
+             * 
+             *       2
+             *     /   \
+             *    1     3
+             *           \
+             *            7
+             *           /
+             *          5
+             *         / \
+             *        4   6
+             */
+            new Node<>(2,
+                new Node<>(1),
+                new Node<>(3,
+                    null,
+                    new Node<>(7,
+                        new Node<>(5,
+                            new Node<>(4),
+                            new Node<>(6)
+                        ),
+                        null
+                    )
+                )
+            )
+        );
+        //@formatter:on
     }
 }

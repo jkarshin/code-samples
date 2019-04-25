@@ -36,8 +36,8 @@ public class MergeSorter<T extends Comparable<T>> implements Sorter<T> {
         int i;
         for (i = leftStart; leftQueue.isEmpty() == false && rightQueue.isEmpty() == false; ++i) {
             //@formatter:off
-			Queue<T> toPop = leftQueue.peek().compareTo(rightQueue.peek()) <= 0 ? leftQueue : rightQueue;
-			//@formatter:on
+            Queue<T> toPop = leftQueue.peek().compareTo(rightQueue.peek()) <= 0 ? leftQueue : rightQueue;
+            //@formatter:on
 
             list.set(i, toPop.remove());
         }

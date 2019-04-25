@@ -47,8 +47,8 @@ public class HeapSorter<T extends Comparable<T>> implements Sorter<T> {
 
     private int compareElements(List<T> list, int index1, int index2) {
         //@formatter:off
-		return list.get(index1).compareTo(list.get(index2));
-		//@formatter:on
+        return list.get(index1).compareTo(list.get(index2));
+        //@formatter:on
     }
 
     private void swap(List<T> list, int index1, int index2) {
