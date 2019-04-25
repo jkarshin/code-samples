@@ -31,7 +31,7 @@ public class SorterTest {
 	static Stream<Arguments> provideSorterAndTestCases() {
 		// TODO [Apr 24, 2019] Add implementations here
 		//@formatter:off
-		return Stream.of(new MergeSorter<Integer>())
+		return Stream.of(new MergeSorter<Integer>(), new HeapSorter<Integer>())
 				.flatMap(sorter ->
 						// Need to wrap the input list, since List.of(...) yields an ImmutableList
 						provideTestCases().map(args -> Arguments.of(sorter, new ArrayList<>((List<Integer>) args.get()[0]), args.get()[1])));
